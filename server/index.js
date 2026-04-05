@@ -65,8 +65,11 @@ app.use((err, req, res, _next) => {
 
 // ─── Start Server ────────────────────────────────────────────
 
-app.listen(PORT, () => {
-  console.log(`SikhiThreads API server running on port ${PORT}`);
-});
+// Only listen when running directly (not on Vercel)
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`SikhiThreads API server running on port ${PORT}`);
+  });
+}
 
 export default app;
