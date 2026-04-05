@@ -27,7 +27,7 @@ export default function DashboardPage() {
   async function loadDashboard() {
     try {
       const res = await api.get('/api/admin/dashboard')
-      setData(res?.data || res)
+      setData(res)
     } catch (err) {
       toast.error('Failed to load dashboard: ' + err.message)
     } finally {

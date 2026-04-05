@@ -32,7 +32,12 @@ async function request(method, path, body) {
     throw new Error(error.error || error.message || `Request failed: ${res.status}`)
   }
   if (res.status === 204) return null
-  return res.json()
+  const json = await res.json()
+  // Unwrap { success, data } envelope from server responses
+  if (json && json.success !== undefined && json.data !== undefined) {
+    return json.data
+  }
+  return json
 }
 
 export const api = {
