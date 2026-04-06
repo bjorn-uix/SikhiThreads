@@ -45,10 +45,11 @@ router.get('/api/products', async (req, res) => {
     // Sorting
     const sortOptions = {
       'created_at': { column: 'created_at', ascending: false },
+      'newest': { column: 'created_at', ascending: false },
       'price_asc': { column: 'price', ascending: true },
       'price_desc': { column: 'price', ascending: false },
+      'best_sellers': { column: 'created_at', ascending: false },
       'name': { column: 'name', ascending: true },
-      'popular': { column: 'total_sales', ascending: false },
     };
     const sortConfig = sortOptions[sort] || sortOptions['created_at'];
     query = query.order(sortConfig.column, { ascending: sortConfig.ascending });
@@ -82,7 +83,7 @@ router.get('/api/products/:slug', async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('products')
-      .select('*, product_images(*), product_variants(*)')
+      .select('*')
       .eq('slug', req.params.slug)
       .eq('is_active', true)
       .single();
@@ -133,7 +134,7 @@ router.get('/api/collections/:slug', async (req, res) => {
     const { data: products, error: prodError } = await supabase
       .from('products')
       .select('*')
-      .eq('collection_tags', req.params.slug)
+      .contains('collection_tags', [req.params.slug])
       .eq('is_active', true)
       .order('created_at', { ascending: false });
 
