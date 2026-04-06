@@ -4,6 +4,7 @@ import { ShoppingBag, Minus, Plus, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import ProductCard from '../components/ProductCard'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 export default function ProductPage() {
@@ -72,6 +73,27 @@ export default function ProductPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SEO
+        title={`${product.name} | SikhiThreads`}
+        description={product.short_description || (product.seo_description ? product.seo_description.slice(0, 160) : `${product.name} — Handcrafted Sikh crochet art by SikhiThreads. Shop now with free shipping on orders over $50.`)}
+        keywords={product.collection_tags ? product.collection_tags.join(', ') : 'sikh art, sikh gifts, crochet art'}
+        image={product.images?.[0] || undefined}
+        url={`https://sikhithreads.com/products/${slug}`}
+        type="product"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.name,
+          description: product.short_description || product.name,
+          image: product.images?.[0] || 'https://sikhithreads.com/og-default.png',
+          offers: {
+            '@type': 'Offer',
+            price: Number(product.price).toFixed(2),
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+          },
+        }}
+      />
       {/* Breadcrumb */}
       <Link to="/shop" className="inline-flex items-center gap-1 text-warm-gray hover:text-brown text-sm no-underline mb-8 transition-colors">
         <ArrowLeft size={16} /> Back to Shop
@@ -84,7 +106,7 @@ export default function ProductPage() {
             {images[selectedImage] ? (
               <img
                 src={images[selectedImage]}
-                alt={product.name}
+                alt={`${product.name} — Sikh Crochet Art by SikhiThreads`}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -103,7 +125,7 @@ export default function ProductPage() {
                     i === selectedImage ? 'border-gold' : 'border-transparent'
                   }`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={img} alt={`${product.name} view ${i + 1} — Sikh Crochet Art by SikhiThreads`} className="w-full h-full object-cover" loading="lazy" />
                 </button>
               ))}
             </div>

@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+import SEO from '../components/SEO'
 
 function InstagramIcon({ size = 24 }) {
   return (
@@ -13,6 +14,12 @@ function InstagramIcon({ size = 24 }) {
 export default function BlogPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+      <SEO
+        title="Blog — Sikh Stories, Culture & Art | SikhiThreads"
+        description="Explore stories of Sikh history, culture, and values through our blog. Learn about Vaisakhi, Guru Nanak, Langar, and more."
+        keywords="sikh blog, sikh stories, sikh history, vaisakhi, sikh culture"
+        url="https://sikhithreads.com/blog"
+      />
       <div className="w-20 h-20 bg-gold-light/20 rounded-full flex items-center justify-center mx-auto mb-8">
         <span className="font-heading text-3xl text-gold">ST</span>
       </div>

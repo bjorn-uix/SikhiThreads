@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, CreditCard, Check } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 const steps = ['Shipping', 'Payment', 'Review']
@@ -65,6 +66,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+        <SEO title="Checkout | SikhiThreads" noindex />
         <h1 className="font-heading text-3xl text-charcoal mb-4">Your cart is empty</h1>
         <Link to="/shop" className="text-brown hover:text-brown-dark font-medium no-underline">
           Go to Shop
@@ -75,6 +77,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SEO title="Checkout | SikhiThreads" noindex />
       {/* Steps */}
       <div className="flex items-center justify-center gap-4 mb-12">
         {steps.map((step, i) => (

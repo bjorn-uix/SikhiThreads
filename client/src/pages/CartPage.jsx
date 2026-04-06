@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, Tag } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
+import SEO from '../components/SEO'
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity, subtotal } = useCart()
@@ -19,6 +20,11 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <SEO
+          title="Shopping Cart | SikhiThreads"
+          description="Review your SikhiThreads shopping cart."
+          noindex
+        />
         <ShoppingBag size={64} className="mx-auto text-warm-gray/40 mb-6" />
         <h1 className="font-heading text-4xl font-bold text-charcoal mb-4">Your Cart is Empty</h1>
         <p className="text-warm-gray mb-8 max-w-md mx-auto">
@@ -36,6 +42,11 @@ export default function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SEO
+        title="Shopping Cart | SikhiThreads"
+        description="Review your SikhiThreads shopping cart."
+        noindex
+      />
       <h1 className="font-heading text-4xl font-bold text-charcoal mb-10">Your Cart</h1>
 
       <div className="grid lg:grid-cols-3 gap-10">

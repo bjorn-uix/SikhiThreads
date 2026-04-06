@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 export default function CollectionPage() {
@@ -33,6 +34,12 @@ export default function CollectionPage() {
 
   return (
     <div>
+      <SEO
+        title={`${collection?.name || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} — Sikh Art Collection | SikhiThreads`}
+        description={collection?.description || `Browse our ${collection?.name || slug.replace(/-/g, ' ')} collection of handcrafted Sikh crochet art at SikhiThreads. Unique wall art, prints, and gifts celebrating Sikhi.`}
+        keywords={`sikh art, ${slug.replace(/-/g, ' ')}, sikh collection, sikh gifts`}
+        url={`https://sikhithreads.com/collections/${slug}`}
+      />
       {/* Collection Hero */}
       <section className="bg-gradient-to-br from-charcoal via-brown-dark to-charcoal py-20 text-center">
         <div className="max-w-4xl mx-auto px-4">

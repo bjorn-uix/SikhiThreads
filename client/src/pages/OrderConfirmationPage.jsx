@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { CheckCircle, Package, ArrowRight } from 'lucide-react'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 export default function OrderConfirmationPage() {
@@ -17,6 +18,7 @@ export default function OrderConfirmationPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <SEO title="Order Confirmed | SikhiThreads" noindex />
       <CheckCircle size={72} className="mx-auto text-success mb-6" />
       <h1 className="font-heading text-4xl font-bold text-charcoal mb-4">Thank You for Your Order!</h1>
       <p className="text-warm-gray text-lg mb-2">Your order has been placed successfully.</p>

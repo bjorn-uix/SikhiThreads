@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, ChevronDown } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 const sortOptions = [
@@ -55,6 +56,12 @@ export default function ShopPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SEO
+        title="Shop Sikh Art — Wall Art, Canvas, Phone Cases & More | SikhiThreads"
+        description="Browse our collection of handcrafted Sikh crochet art. Wall art prints, canvas wraps, phone cases, mugs, apparel, and digital downloads. Free shipping on orders over $50."
+        keywords="buy sikh art, sikh wall art, sikh prints, sikh canvas, sikh phone case, sikh gifts online"
+        url="https://sikhithreads.com/shop"
+      />
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="font-heading text-5xl font-bold text-charcoal mb-4">Shop</h1>

@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Heart } from 'lucide-react'
+import SEO from '../components/SEO'
 
 export default function OurStoryPage() {
   return (
     <div>
+      <SEO
+        title="Our Story — SikhiThreads | Sikh Stories Woven in Thread"
+        description="SikhiThreads brings Sikh values, traditions, and stories to life through a distinctive crochet art aesthetic. Learn about our mission to celebrate Sikhi through art."
+        keywords="sikhithreads, sikh art brand, crochet sikh art, sikh storytelling"
+        url="https://sikhithreads.com/our-story"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-charcoal via-brown-dark to-charcoal py-24 text-center">
         <div className="max-w-4xl mx-auto px-4">

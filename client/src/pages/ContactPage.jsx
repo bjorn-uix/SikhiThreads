@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Send, Mail } from 'lucide-react'
+import SEO from '../components/SEO'
 
 function InstagramIcon({ size = 24, className = '' }) {
   return (
@@ -38,6 +39,11 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <SEO
+        title="Contact Us — SikhiThreads"
+        description="Get in touch with the SikhiThreads team. Questions about orders, custom art, or partnerships? We'd love to hear from you."
+        url="https://sikhithreads.com/contact"
+      />
       <div className="text-center mb-12">
         <h1 className="font-heading text-5xl font-bold text-charcoal mb-4">Contact Us</h1>
         <p className="text-warm-gray max-w-lg mx-auto">

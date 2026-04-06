@@ -25,8 +25,9 @@ export default function ProductCard({ product }) {
         {product.images?.[0] ? (
           <img
             src={product.images[0]}
-            alt={product.name}
+            alt={`${product.name} — Sikh Crochet Art by SikhiThreads`}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gold-light/20">

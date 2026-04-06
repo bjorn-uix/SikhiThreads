@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Send, Upload } from 'lucide-react'
 import toast from 'react-hot-toast'
+import SEO from '../components/SEO'
 import { api } from '../lib/api'
 
 const orderTypes = [
@@ -53,6 +54,12 @@ export default function CustomOrdersPage() {
 
   return (
     <div>
+      <SEO
+        title="Custom Sikh Art Orders — Family Portraits & Gurdwara Art | SikhiThreads"
+        description="Commission custom crochet-style Sikh art. Family portraits, Gurdwara art, and corporate commissions in our signature style. Starting at $150."
+        keywords="custom sikh art, sikh family portrait, gurdwara art commission, personalized sikh gifts"
+        url="https://sikhithreads.com/custom-orders"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-charcoal via-brown-dark to-charcoal py-24 text-center">
         <div className="max-w-4xl mx-auto px-4">

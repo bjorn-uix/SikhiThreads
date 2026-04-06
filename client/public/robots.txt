@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-confirmation
+Disallow: /track-order
+
+Sitemap: https://sikhithreads.com/sitemap.xml

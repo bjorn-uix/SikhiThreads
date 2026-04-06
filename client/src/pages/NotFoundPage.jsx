@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import SEO from '../components/SEO'
 
 export default function NotFoundPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+      <SEO title="Page Not Found | SikhiThreads" noindex />
       <h1 className="font-heading text-8xl font-bold text-gold-light mb-4">404</h1>
       <h2 className="font-heading text-3xl font-bold text-charcoal mb-4">Page Not Found</h2>
       <p className="text-warm-gray text-lg mb-8">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Star } from 'lucide-react'
+import SEO from '../components/SEO'
 
 function InstagramIcon({ size = 24, className = '' }) {
   return (
@@ -46,6 +47,20 @@ export default function HomePage() {
 
   return (
     <div>
+      <SEO
+        title="SikhiThreads — Sikh Art & Crochet Storytelling | Handcrafted Wall Art, Prints & Gifts"
+        description="Discover handcrafted crochet-aesthetic Sikh art that brings the beauty of Sikhi to life. Shop wall art, canvas prints, phone cases, and unique gifts. Free shipping over $50."
+        keywords="sikh art, sikh wall art, sikh gifts, crochet art, sikh home decor, vaisakhi gifts, golden temple art, guru nanak art"
+        url="https://sikhithreads.com/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'SikhiThreads',
+          url: 'https://sikhithreads.com',
+          logo: 'https://sikhithreads.com/og-default.png',
+          sameAs: ['https://instagram.com/sikhithreads'],
+        }}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-charcoal via-brown-dark to-charcoal min-h-[80vh] flex items-center">
         <div className="absolute inset-0 opacity-10">
