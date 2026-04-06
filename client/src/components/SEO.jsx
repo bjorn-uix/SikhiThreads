@@ -12,8 +12,20 @@ export default function SEO({
   type = 'website',
   jsonLd,
   noindex = false,
+  breadcrumbs,
 }) {
   const fullTitle = title || SITE_NAME
+
+  const breadcrumbJsonLd = breadcrumbs && breadcrumbs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  } : null
 
   return (
     <Helmet>
@@ -38,9 +50,22 @@ export default function SEO({
       <meta name="twitter:image" content={image} />
 
       {/* JSON-LD Structured Data */}
-      {jsonLd && (
+      {jsonLd && Array.isArray(jsonLd) ? (
+        jsonLd.map((ld, i) => (
+          <script key={i} type="application/ld+json">
+            {JSON.stringify(ld)}
+          </script>
+        ))
+      ) : jsonLd ? (
         <script type="application/ld+json">
           {JSON.stringify(jsonLd)}
+        </script>
+      ) : null}
+
+      {/* Breadcrumb JSON-LD */}
+      {breadcrumbJsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbJsonLd)}
         </script>
       )}
     </Helmet>

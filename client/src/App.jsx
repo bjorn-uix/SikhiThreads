@@ -15,6 +15,7 @@ import ContactPage from './pages/ContactPage'
 import BlogPage from './pages/BlogPage'
 import BlogPostPage from './pages/BlogPostPage'
 import GlossaryPage from './pages/GlossaryPage'
+import LandingPage from './pages/LandingPage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdminLayout from './admin/AdminLayout'
 
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/glossary" element={<GlossaryPage />} />
+        <Route path="/l/:slug" element={<LandingPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="/admin/*" element={<AdminLayout />} />

@@ -1,8 +1,42 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Calendar, User, ArrowLeft, ArrowRight, Share2, Copy, Check } from 'lucide-react'
+import { Calendar, User, ArrowLeft, ArrowRight, Share2, Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import SEO from '../components/SEO'
 import { api } from '../lib/api'
+
+// FAQ data for blog posts — keyed by slug
+const BLOG_FAQS = {
+  'what-is-vaisakhi': [
+    { q: 'When is Vaisakhi celebrated?', a: 'Vaisakhi is celebrated on April 13th or 14th each year. It marks the founding of the Khalsa by Guru Gobind Singh Ji in 1699 and is also a traditional harvest festival in Punjab.' },
+    { q: 'How is Vaisakhi celebrated?', a: 'Vaisakhi is celebrated with Nagar Kirtan processions, special Gurdwara services, Gatka martial arts demonstrations, Langar feasts, and community gatherings. Many Sikhs also take Amrit (baptism) on this day.' },
+    { q: 'What is the significance of Vaisakhi in Sikhism?', a: 'Vaisakhi holds immense significance as the day Guru Gobind Singh Ji created the Khalsa in 1699 at Anandpur Sahib. The Panj Pyare (Five Beloved Ones) were baptized, establishing the distinct Sikh identity and the tradition of Amrit.' },
+    { q: 'Is Vaisakhi a public holiday?', a: 'Vaisakhi is a gazetted holiday in Punjab, India, and is recognized by Sikh communities worldwide. In countries like Canada and the UK with large Sikh populations, major Nagar Kirtan celebrations draw thousands of participants.' },
+  ],
+  'golden-temple-harmandir-sahib': [
+    { q: 'Why is the Golden Temple called Harmandir Sahib?', a: 'Harmandir Sahib translates to "The Abode of God." It is the formal name for the Golden Temple, reflecting its role as the most sacred Gurdwara in Sikhism. The name "Golden Temple" comes from its gold-plated exterior.' },
+    { q: 'Can anyone visit the Golden Temple?', a: 'Yes. The Golden Temple welcomes all visitors regardless of religion, caste, gender, or nationality. This open-door policy reflects the core Sikh principle of equality. Visitors are asked to cover their heads and remove their shoes as a sign of respect.' },
+    { q: 'How many people does the Golden Temple feed daily?', a: 'The Golden Temple Langar (community kitchen) serves free meals to approximately 50,000 to 100,000 people every day, making it one of the largest free kitchens in the world. Everyone sits together on the floor as equals.' },
+    { q: 'When was the Golden Temple built?', a: 'The construction of Harmandir Sahib was initiated by the fourth Guru, Guru Ram Das Ji, who created the sacred pool (Amrit Sarovar) in the 1570s. The first Harmandir Sahib structure was completed under the fifth Guru, Guru Arjan Dev Ji, in 1604.' },
+  ],
+  'guru-nanak-dev-ji': [
+    { q: 'Who was Guru Nanak Dev Ji?', a: 'Guru Nanak Dev Ji (1469-1539) was the founder of Sikhism and the first of the ten Sikh Gurus. Born in Talwandi (now Nankana Sahib, Pakistan), he traveled extensively spreading a message of equality, devotion to one God, and honest living.' },
+    { q: 'What are the three pillars of Guru Nanak\'s teachings?', a: 'Guru Nanak Dev Ji taught three fundamental principles: Naam Japna (meditating on God\'s name), Kirat Karni (earning an honest living), and Vand Chakna (sharing with others). These form the foundation of Sikh daily practice.' },
+    { q: 'What is Guru Nanak Gurpurab?', a: 'Guru Nanak Gurpurab is the celebration of Guru Nanak Dev Ji\'s birth anniversary. It is one of the most important Sikh festivals, typically falling in November. It is celebrated with Prabhat Pheris (morning processions), Akhand Path, Langar, and community gatherings.' },
+    { q: 'How far did Guru Nanak travel?', a: 'Guru Nanak Dev Ji undertook four major journeys called Udasis, traveling across South Asia, the Middle East, and possibly parts of Central Asia. He visited Hindu and Muslim holy sites, engaging with people of all faiths and spreading his universal message.' },
+  ],
+  'what-is-langar': [
+    { q: 'What is Langar in Sikhism?', a: 'Langar is the community kitchen and the free meal served at every Gurdwara. Established by Guru Nanak Dev Ji, Langar embodies the Sikh principles of equality, sharing, and selfless service. Everyone sits together on the floor and eats the same food regardless of background.' },
+    { q: 'Who can eat Langar?', a: 'Everyone is welcome to eat Langar regardless of religion, caste, gender, social status, or nationality. The tradition was specifically designed to break down social barriers and demonstrate that all people are equal in the eyes of God.' },
+    { q: 'Is Langar always vegetarian?', a: 'Yes. Langar is always vegetarian to ensure that everyone can partake, regardless of dietary restrictions or religious food laws. The food is simple, nutritious, and prepared with devotion by volunteers.' },
+    { q: 'How is Langar prepared and served?', a: 'Langar is prepared and served entirely by volunteers (Sevadars) as an act of Seva (selfless service). Volunteers cook, serve, and clean as a devotional practice. The food is funded by donations from the Sangat (congregation).' },
+  ],
+  'sikh-art-home-decorating-guide': [
+    { q: 'Where should I place Sikh art in my home?', a: 'Sikh art works beautifully in living rooms as a focal point, in prayer rooms for spiritual ambiance, in hallways to greet visitors, and in bedrooms for contemplative settings. Consider the size of the wall and the lighting when choosing placement.' },
+    { q: 'What types of Sikh art are best for home decor?', a: 'Canvas wraps and framed art prints are popular for wall decor. For a modern touch, crochet-style art from SikhiThreads offers a unique aesthetic. Digital downloads are great for creating custom arrangements. Consider mixing different sizes and subjects for visual interest.' },
+    { q: 'How do I choose the right size Sikh art for my wall?', a: 'For a statement piece above a sofa, choose art that is roughly two-thirds the width of the furniture. For smaller walls or grouped displays, 8x10 or 11x14 inch prints work well. Large canvas wraps (24x36 inches or bigger) are ideal for open walls with plenty of space.' },
+    { q: 'Can I mix Sikh art with other decor styles?', a: 'Absolutely. Sikh art, especially modern interpretations like crochet-style pieces, blends well with contemporary, minimalist, bohemian, and traditional decor. The warm earth tones in SikhiThreads pieces complement most color palettes.' },
+  ],
+}
 
 const CATEGORY_LABELS = {
   'sikh-history': 'Sikh History',
@@ -28,6 +62,7 @@ export default function BlogPostPage() {
   const [relatedPosts, setRelatedPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState(false)
+  const [openFAQ, setOpenFAQ] = useState(0)
 
   useEffect(() => {
     async function fetchPost() {
@@ -98,7 +133,9 @@ export default function BlogPostPage() {
     )
   }
 
-  const jsonLd = {
+  const faqs = BLOG_FAQS[slug] || []
+
+  const blogJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
@@ -112,6 +149,21 @@ export default function BlogPostPage() {
       url: 'https://sikhithreads.com',
     },
   }
+
+  const jsonLd = faqs.length > 0
+    ? [
+        blogJsonLd,
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        },
+      ]
+    : blogJsonLd
 
   return (
     <div className="bg-cream min-h-screen">
@@ -247,6 +299,37 @@ export default function BlogPostPage() {
                   <p className="text-warm-gray text-sm line-clamp-2">{rp.excerpt}</p>
                 </div>
               </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      {faqs.length > 0 && (
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="font-heading text-2xl font-bold text-charcoal mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="bg-warm-white rounded-xl shadow-sm border border-gold-light/20 px-6 md:px-8">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border-b border-gold-light/30 last:border-b-0">
+                <button
+                  onClick={() => setOpenFAQ(openFAQ === i ? -1 : i)}
+                  className="w-full flex items-center justify-between py-5 text-left cursor-pointer bg-transparent border-none"
+                >
+                  <span className="font-heading text-lg font-semibold text-charcoal pr-4">{faq.q}</span>
+                  {openFAQ === i ? (
+                    <ChevronUp size={20} className="text-gold flex-shrink-0" />
+                  ) : (
+                    <ChevronDown size={20} className="text-warm-gray flex-shrink-0" />
+                  )}
+                </button>
+                {openFAQ === i && (
+                  <div className="pb-5 pr-8">
+                    <p className="text-charcoal-light leading-relaxed">{faq.a}</p>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </section>

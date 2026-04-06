@@ -186,6 +186,50 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Landing Pages -->
+  <url>
+    <loc>https://sikhithreads.com/l/golden-temple-wallpaper</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/waheguru-wallpaper</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/guru-nanak-wallpaper</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/golden-temple-painting</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/sikh-wedding-gifts</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/vaisakhi-decorations</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sikhithreads.com/l/sikh-home-decor</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Blog Posts -->
   <url>
     <loc>https://sikhithreads.com/blog/what-is-vaisakhi</loc>

@@ -20,6 +20,14 @@ const supportLinks = [
   { to: '/contact', label: 'Help & Support' },
 ]
 
+const popularSearchLinks = [
+  { to: '/l/golden-temple-wallpaper', label: 'Golden Temple Wallpaper' },
+  { to: '/l/waheguru-wallpaper', label: 'Waheguru Wallpaper' },
+  { to: '/l/sikh-wedding-gifts', label: 'Sikh Wedding Gifts' },
+  { to: '/l/vaisakhi-decorations', label: 'Vaisakhi Decorations' },
+  { to: '/l/sikh-home-decor', label: 'Sikh Home Decor' },
+]
+
 export default function Footer() {
   return (
     <footer className="bg-charcoal text-cream">
@@ -32,7 +40,7 @@ export default function Footer() {
 
       {/* Links Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Shop */}
           <div>
             <h3 className="font-heading text-lg font-semibold text-cream mb-4">Shop</h3>
@@ -66,6 +74,20 @@ export default function Footer() {
             <h3 className="font-heading text-lg font-semibold text-cream mb-4">Support</h3>
             <ul className="space-y-2">
               {supportLinks.map(link => (
+                <li key={link.to}>
+                  <Link to={link.to} className="text-warm-gray hover:text-gold-light text-sm no-underline transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Popular Searches */}
+          <div>
+            <h3 className="font-heading text-lg font-semibold text-cream mb-4">Popular Searches</h3>
+            <ul className="space-y-2">
+              {popularSearchLinks.map(link => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-warm-gray hover:text-gold-light text-sm no-underline transition-colors">
                     {link.label}

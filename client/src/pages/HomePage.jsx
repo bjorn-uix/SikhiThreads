@@ -52,14 +52,27 @@ export default function HomePage() {
         description="Discover handcrafted crochet-aesthetic Sikh art that brings the beauty of Sikhi to life. Shop wall art, canvas prints, phone cases, and unique gifts. Free shipping over $50."
         keywords="sikh art, sikh wall art, sikh gifts, crochet art, sikh home decor, vaisakhi gifts, golden temple art, guru nanak art"
         url="https://sikhithreads.com/"
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: 'SikhiThreads',
-          url: 'https://sikhithreads.com',
-          logo: 'https://sikhithreads.com/og-default.png',
-          sameAs: ['https://instagram.com/sikhithreads'],
-        }}
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'SikhiThreads',
+            url: 'https://sikhithreads.com',
+            logo: 'https://sikhithreads.com/og-default.png',
+            sameAs: ['https://instagram.com/sikhithreads'],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'SikhiThreads',
+            url: 'https://sikhithreads.com',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://sikhithreads.com/shop?search={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+          },
+        ]}
       />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-charcoal via-brown-dark to-charcoal min-h-[80vh] flex items-center">
