@@ -11,6 +11,8 @@ import adminRoutes from './routes/admin.js';
 import uploadRoutes from './routes/upload.js';
 import emailRoutes from './routes/email.js';
 import reviewRoutes from './routes/reviews.js';
+import blogRoutes from './routes/blog.js';
+import glossaryRoutes from './routes/glossary.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -65,6 +67,8 @@ app.use('/api/admin', adminRoutes);
 app.use(uploadRoutes);
 app.use(emailRoutes);
 app.use(reviewRoutes);
+app.use(blogRoutes);
+app.use(glossaryRoutes);
 
 // ─── 404 Handler ─────────────────────────────────────────────
 

@@ -13,6 +13,8 @@ import OurStoryPage from './pages/OurStoryPage'
 import CustomOrdersPage from './pages/CustomOrdersPage'
 import ContactPage from './pages/ContactPage'
 import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
+import GlossaryPage from './pages/GlossaryPage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdminLayout from './admin/AdminLayout'
 
@@ -44,6 +46,8 @@ export default function App() {
         <Route path="/custom-orders" element={<CustomOrdersPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="/admin/*" element={<AdminLayout />} />

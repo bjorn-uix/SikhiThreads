@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/collections/vaisakhi', label: 'Collections' },
   { to: '/custom-orders', label: 'Custom Orders' },
   { to: '/our-story', label: 'Our Story' },
+  { to: '/blog', label: 'Blog' },
 ]
 
 export default function Navbar() {

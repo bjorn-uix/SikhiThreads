@@ -545,4 +545,196 @@ router.get('/subscribers', async (req, res) => {
   }
 });
 
+// ─── Blog Posts ─────────────────────────────────────────────
+
+router.get('/blog', async (req, res) => {
+  try {
+    const { page = 1, limit = 20 } = req.query;
+    const pageNum = Math.max(1, parseInt(page, 10));
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10)));
+    const from = (pageNum - 1) * limitNum;
+    const to = from + limitNum - 1;
+
+    const { data, error, count } = await supabase
+      .from('blog_posts')
+      .select('*', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(from, to);
+
+    if (error) throw error;
+
+    return res.json({
+      success: true,
+      data: {
+        posts: data,
+        pagination: { page: pageNum, limit: limitNum, total: count, totalPages: Math.ceil(count / limitNum) },
+      },
+    });
+  } catch (err) {
+    console.error('Admin blog list error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to fetch blog posts' });
+  }
+});
+
+router.post('/blog', async (req, res) => {
+  try {
+    const postData = req.body;
+    postData.slug = generateSlug(postData.title);
+
+    // Ensure unique slug
+    const { data: existing } = await supabase
+      .from('blog_posts')
+      .select('slug')
+      .eq('slug', postData.slug)
+      .single();
+
+    if (existing) {
+      postData.slug = `${postData.slug}-${Date.now().toString(36)}`;
+    }
+
+    if (postData.is_published && !postData.published_at) {
+      postData.published_at = new Date().toISOString();
+    }
+
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .insert(postData)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return res.status(201).json({ success: true, data });
+  } catch (err) {
+    console.error('Admin blog create error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to create blog post' });
+  }
+});
+
+router.put('/blog/:id', async (req, res) => {
+  try {
+    const updates = req.body;
+    if (updates.title) {
+      updates.slug = generateSlug(updates.title);
+    }
+    if (updates.is_published && !updates.published_at) {
+      updates.published_at = new Date().toISOString();
+    }
+
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .update(updates)
+      .eq('id', req.params.id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    if (!data) return res.status(404).json({ success: false, error: 'Blog post not found' });
+
+    return res.json({ success: true, data });
+  } catch (err) {
+    console.error('Admin blog update error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to update blog post' });
+  }
+});
+
+router.delete('/blog/:id', async (req, res) => {
+  try {
+    const { error } = await supabase
+      .from('blog_posts')
+      .delete()
+      .eq('id', req.params.id);
+
+    if (error) throw error;
+    return res.json({ success: true, data: { message: 'Blog post deleted' } });
+  } catch (err) {
+    console.error('Admin blog delete error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to delete blog post' });
+  }
+});
+
+// ─── Glossary Terms ─────────────────────────────────────────
+
+router.get('/glossary', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('glossary_terms')
+      .select('*')
+      .order('term', { ascending: true });
+
+    if (error) throw error;
+    return res.json({ success: true, data });
+  } catch (err) {
+    console.error('Admin glossary list error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to fetch glossary terms' });
+  }
+});
+
+router.post('/glossary', async (req, res) => {
+  try {
+    const termData = req.body;
+    termData.slug = generateSlug(termData.term);
+
+    const { data: existing } = await supabase
+      .from('glossary_terms')
+      .select('slug')
+      .eq('slug', termData.slug)
+      .single();
+
+    if (existing) {
+      termData.slug = `${termData.slug}-${Date.now().toString(36)}`;
+    }
+
+    const { data, error } = await supabase
+      .from('glossary_terms')
+      .insert(termData)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return res.status(201).json({ success: true, data });
+  } catch (err) {
+    console.error('Admin glossary create error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to create glossary term' });
+  }
+});
+
+router.put('/glossary/:id', async (req, res) => {
+  try {
+    const updates = req.body;
+    if (updates.term) {
+      updates.slug = generateSlug(updates.term);
+    }
+
+    const { data, error } = await supabase
+      .from('glossary_terms')
+      .update(updates)
+      .eq('id', req.params.id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    if (!data) return res.status(404).json({ success: false, error: 'Glossary term not found' });
+
+    return res.json({ success: true, data });
+  } catch (err) {
+    console.error('Admin glossary update error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to update glossary term' });
+  }
+});
+
+router.delete('/glossary/:id', async (req, res) => {
+  try {
+    const { error } = await supabase
+      .from('glossary_terms')
+      .delete()
+      .eq('id', req.params.id);
+
+    if (error) throw error;
+    return res.json({ success: true, data: { message: 'Glossary term deleted' } });
+  } catch (err) {
+    console.error('Admin glossary delete error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to delete glossary term' });
+  }
+});
+
 export default router;

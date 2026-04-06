@@ -11,6 +11,7 @@ const shopLinks = [
 const aboutLinks = [
   { to: '/our-story', label: 'Our Story' },
   { to: '/blog', label: 'Blog' },
+  { to: '/glossary', label: 'Sikh Glossary' },
   { to: '/contact', label: 'Contact' },
 ]
 
