@@ -18,11 +18,27 @@ const PORT = process.env.PORT || 3001;
 // ─── Global Middleware ───────────────────────────────────────
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    const allowed = [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://sikhithreads.com',
+      'https://www.sikhithreads.com',
+    ];
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin || allowed.some(u => origin.startsWith(u)) || origin.includes('vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all for now during launch
+    }
+  },
   credentials: true,
 }));
-app.use(helmet());
-app.use(morgan('dev'));
+// helmet disabled on serverless — causes issues
+// app.use(helmet());
+if (process.env.VERCEL !== '1') {
+  app.use(morgan('dev'));
+}
 
 // Stripe webhooks need the raw body for signature verification.
 // This must be registered BEFORE express.json() is applied globally.
@@ -59,8 +75,8 @@ app.use((req, res) => {
 // ─── Global Error Handler ────────────────────────────────────
 
 app.use((err, req, res, _next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ success: false, error: 'Internal server error' });
+  console.error('Unhandled error:', err.message, err.stack);
+  res.status(500).json({ success: false, error: err.message || 'Internal server error' });
 });
 
 // ─── Start Server ────────────────────────────────────────────
