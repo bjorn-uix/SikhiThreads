@@ -55,6 +55,10 @@ export default function SEO({
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={SITE_NAME} />
 
+      {/* Pinterest Rich Pins */}
+      <meta property="og:pin_count" content="true" />
+      <meta name="pinterest-rich-pin" content="true" />
+
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />

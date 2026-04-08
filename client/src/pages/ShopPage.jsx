@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, ChevronDown } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
 import SEO from '../components/SEO'
+import CountdownBanner from '../components/CountdownBanner'
+import SocialProof from '../components/SocialProof'
 import { api } from '../lib/api'
 
 const sortOptions = [
@@ -55,6 +57,8 @@ export default function ShopPage() {
   }
 
   return (
+    <div>
+      <CountdownBanner />
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <SEO
         title="Shop Sikh Art — Wall Art, Canvas, Phone Cases & More | SikhiThreads"
@@ -188,6 +192,8 @@ export default function ShopPage() {
           )}
         </div>
       )}
+    </div>
+      <SocialProof />
     </div>
   )
 }

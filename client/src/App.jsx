@@ -16,17 +16,23 @@ import BlogPage from './pages/BlogPage'
 import BlogPostPage from './pages/BlogPostPage'
 import GlossaryPage from './pages/GlossaryPage'
 import LandingPage from './pages/LandingPage'
+import GiveawayPage from './pages/GiveawayPage'
+import VaisakhiGreetingPage from './pages/VaisakhiGreetingPage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdminLayout from './admin/AdminLayout'
+import EmailPopup from './components/EmailPopup'
+import ReferralBanner from './components/ReferralBanner'
 
 function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col">
+      <ReferralBanner />
       <Navbar />
       <main className="flex-1">
         <Outlet />
       </main>
       <Footer />
+      <EmailPopup />
     </div>
   )
 }
@@ -50,6 +56,8 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/glossary" element={<GlossaryPage />} />
         <Route path="/l/:slug" element={<LandingPage />} />
+        <Route path="/giveaway" element={<GiveawayPage />} />
+        <Route path="/vaisakhi" element={<VaisakhiGreetingPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="/admin/*" element={<AdminLayout />} />

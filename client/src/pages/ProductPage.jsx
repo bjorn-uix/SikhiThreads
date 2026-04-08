@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { ShoppingBag, Minus, Plus, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import ProductCard from '../components/ProductCard'
 import SEO from '../components/SEO'
 import RelatedContent from '../components/RelatedContent'
+import ShareDiscount from '../components/ShareDiscount'
+import SocialProof from '../components/SocialProof'
 import { api } from '../lib/api'
 
 export default function ProductPage() {
@@ -107,6 +110,14 @@ export default function ProductPage() {
           },
         }}
       />
+      {/* Pinterest Product Pins */}
+      <Helmet>
+        <meta property="product:price:amount" content={Number(product.price).toFixed(2)} />
+        <meta property="product:price:currency" content="USD" />
+        <meta property="product:availability" content="in stock" />
+        <meta property="product:brand" content="SikhiThreads" />
+        <meta property="product:category" content={product.collection_name || 'Sikh Art'} />
+      </Helmet>
       {/* Breadcrumb */}
       <Link to="/shop" className="inline-flex items-center gap-1 text-warm-gray hover:text-brown text-sm no-underline mb-8 transition-colors">
         <ArrowLeft size={16} /> Back to Shop
@@ -223,6 +234,9 @@ export default function ProductPage() {
             <ShoppingBag size={20} />
             Add to Cart
           </button>
+
+          {/* Share & Save */}
+          <ShareDiscount productName={product.name} productSlug={slug} />
         </div>
       </div>
 
@@ -240,6 +254,9 @@ export default function ProductPage() {
 
       {/* Cross-linked Content for Topical Authority */}
       <RelatedContent currentType="product" currentSlug={slug} />
+
+      {/* Social Proof Notifications */}
+      <SocialProof />
     </div>
   )
 }
