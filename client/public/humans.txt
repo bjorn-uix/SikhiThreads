@@ -1,0 +1,22 @@
+/* TEAM */
+Brand: SikhiThreads
+Contact: hello@sikhithreads.com
+Instagram: @sikhithreads
+Location: United States
+
+/* SITE */
+Last update: 2026-04-06
+Language: English
+Standards: HTML5, CSS3, ES6+
+Framework: React 18 + Vite
+Deployment: Vercel
+API: Node.js + Express on Vercel Serverless
+Database: Supabase (PostgreSQL)
+Payments: Stripe
+Design System: Tailwind CSS with custom cream/gold/brown/charcoal palette
+Fonts: Playfair Display (headings), Inter (body)
+
+/* THANKS */
+The Sikh community worldwide for inspiration and support.
+All the Gurus whose teachings guide this work.
+Open source contributors who built the tools we use.

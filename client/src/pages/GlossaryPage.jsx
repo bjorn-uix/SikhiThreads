@@ -133,6 +133,13 @@ export default function GlossaryPage() {
     name: 'Sikh Glossary',
     description: 'A comprehensive glossary of Sikh terms, concepts, and traditions.',
     url: 'https://sikhithreads.com/glossary',
+    definedTerm: terms.map(t => ({
+      '@type': 'DefinedTerm',
+      name: t.term,
+      description: t.definition,
+      ...(t.pronunciation ? { alternateName: t.pronunciation } : {}),
+      inDefinedTermSet: 'https://sikhithreads.com/glossary',
+    })),
   }
 
   return (

@@ -1,7 +1,11 @@
 import { Helmet } from 'react-helmet-async'
+import { useLocation } from 'react-router-dom'
 
 const SITE_NAME = 'SikhiThreads'
 const DEFAULT_IMAGE = 'https://sikhithreads.com/og-default.png'
+const SITE_URL = 'https://sikhithreads.com'
+
+const HREFLANG_LOCALES = ['en-us', 'en-gb', 'en-ca', 'en-in', 'en-au']
 
 export default function SEO({
   title,
@@ -15,6 +19,8 @@ export default function SEO({
   breadcrumbs,
 }) {
   const fullTitle = title || SITE_NAME
+  const location = useLocation()
+  const currentPath = location.pathname
 
   const breadcrumbJsonLd = breadcrumbs && breadcrumbs.length > 0 ? {
     '@context': 'https://schema.org',
@@ -34,6 +40,12 @@ export default function SEO({
       {keywords && <meta name="keywords" content={keywords} />}
       {noindex && <meta name="robots" content="noindex,nofollow" />}
       {url && <link rel="canonical" href={url} />}
+
+      {/* Hreflang Tags for International SEO */}
+      {HREFLANG_LOCALES.map(locale => (
+        <link key={locale} rel="alternate" hrefLang={locale} href={`${SITE_URL}${currentPath}`} />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${currentPath}`} />
 
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />

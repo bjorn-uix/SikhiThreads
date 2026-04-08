@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Calendar, User, ArrowLeft, ArrowRight, Share2, Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import SEO from '../components/SEO'
+import RelatedContent from '../components/RelatedContent'
 import { api } from '../lib/api'
 
 // FAQ data for blog posts — keyed by slug
@@ -147,6 +148,10 @@ export default function BlogPostPage() {
       '@type': 'Organization',
       name: 'SikhiThreads',
       url: 'https://sikhithreads.com',
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.post-excerpt', '.faq-answer'],
     },
   }
 
@@ -334,6 +339,11 @@ export default function BlogPostPage() {
           </div>
         </section>
       )}
+
+      {/* Related Content — Cross-links for topical authority */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RelatedContent currentType="blog" currentSlug={slug} />
+      </div>
 
       {/* CTA */}
       <section className="bg-charcoal text-cream py-16 mt-12">

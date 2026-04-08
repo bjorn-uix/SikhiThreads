@@ -6,4 +6,25 @@ Disallow: /checkout
 Disallow: /order-confirmation
 Disallow: /track-order
 
+# AI Search Crawlers - Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
 Sitemap: https://sikhithreads.com/sitemap.xml
+Sitemap: https://sikhithreads.com/image-sitemap.xml

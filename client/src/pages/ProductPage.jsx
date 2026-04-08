@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import ProductCard from '../components/ProductCard'
 import SEO from '../components/SEO'
+import RelatedContent from '../components/RelatedContent'
 import { api } from '../lib/api'
 
 export default function ProductPage() {
@@ -86,11 +87,23 @@ export default function ProductPage() {
           name: product.name,
           description: product.short_description || product.name,
           image: product.images?.[0] || 'https://sikhithreads.com/og-default.png',
+          brand: { '@type': 'Brand', name: 'SikhiThreads' },
+          sku: product.id,
+          mpn: product.slug || slug,
+          category: product.collection_name || (product.collection_tags || []).join(', ') || 'Sikh Art',
+          material: (product.collection_tags || []).some(t => t === 'canvas') ? 'Canvas' :
+                    (product.collection_tags || []).some(t => t === 'digital-downloads') ? 'Digital File' :
+                    (product.collection_tags || []).some(t => t === 'apparel') ? 'Premium Cotton' :
+                    (product.collection_tags || []).some(t => t === 'phone-cases') ? 'Polycarbonate and TPU' :
+                    (product.collection_tags || []).some(t => t === 'mugs') ? 'Ceramic' :
+                    'Premium archival paper',
           offers: {
             '@type': 'Offer',
             price: Number(product.price).toFixed(2),
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
+            seller: { '@type': 'Organization', name: 'SikhiThreads' },
+            url: `https://sikhithreads.com/products/${slug}`,
           },
         }}
       />
@@ -224,6 +237,9 @@ export default function ProductPage() {
           </div>
         </section>
       )}
+
+      {/* Cross-linked Content for Topical Authority */}
+      <RelatedContent currentType="product" currentSlug={slug} />
     </div>
   )
 }

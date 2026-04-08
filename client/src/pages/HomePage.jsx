@@ -72,6 +72,29 @@ export default function HomePage() {
               'query-input': 'required name=search_term_string',
             },
           },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Store',
+            name: 'SikhiThreads',
+            description: 'Sikh cultural art brand creating crochet-aesthetic storytelling art',
+            url: 'https://sikhithreads.com',
+            image: 'https://sikhithreads.com/og-default.png',
+            priceRange: '$5 - $180',
+            currenciesAccepted: 'USD',
+            paymentAccepted: 'Credit Card, Debit Card',
+            areaServed: ['US', 'CA', 'UK', 'IN', 'AU'],
+            hasOfferCatalog: {
+              '@type': 'OfferCatalog',
+              name: 'Sikh Art Collection',
+              itemListElement: [
+                { '@type': 'OfferCatalog', name: 'Wall Art' },
+                { '@type': 'OfferCatalog', name: 'Phone Cases' },
+                { '@type': 'OfferCatalog', name: 'Home & Living' },
+                { '@type': 'OfferCatalog', name: 'Digital Downloads' },
+                { '@type': 'OfferCatalog', name: 'Apparel' },
+              ],
+            },
+          },
         ]}
       />
       {/* Hero Section */}
