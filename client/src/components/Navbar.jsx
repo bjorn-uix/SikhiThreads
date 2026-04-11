@@ -20,12 +20,12 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement Bar */}
-      <div className="bg-gold text-warm-white text-center py-2 px-4 text-sm font-medium tracking-wide">
+      <div className="bg-gold text-warm-white text-center py-2 px-4 text-sm font-medium tracking-wide yarn-texture">
         Free shipping on orders over $50
       </div>
 
       {/* Main Navbar */}
-      <nav className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-gold-light/40">
+      <nav className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b-2 border-dashed border-gold-light/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -44,7 +44,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `text-sm font-medium tracking-wide no-underline transition-colors ${
                       isActive
-                        ? 'text-brown-dark border-b-2 border-gold pb-0.5'
+                        ? 'text-brown-dark border-b-2 border-dashed border-gold pb-0.5'
                         : 'text-charcoal-light hover:text-brown'
                     }`
                   }
@@ -56,6 +56,10 @@ export default function Navbar() {
 
             {/* Right Icons */}
             <div className="flex items-center gap-4">
+              <Link to="/instagram" className="text-charcoal-light hover:text-brown transition-colors" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </Link>
+
               <button className="text-charcoal-light hover:text-brown transition-colors" aria-label="Search">
                 <Search size={20} />
               </button>

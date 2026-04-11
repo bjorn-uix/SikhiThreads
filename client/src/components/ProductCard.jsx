@@ -18,9 +18,9 @@ export default function ProductCard({ product }) {
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="group block no-underline"
+      className="group block no-underline yarn-wobble"
     >
-      <div className="relative overflow-hidden rounded-xl bg-cream-dark aspect-square mb-3">
+      <div className="relative overflow-hidden rounded-xl bg-cream-dark aspect-square mb-3 stitch-border">
         {/* Product Image */}
         {product.images?.[0] ? (
           <img
@@ -37,7 +37,8 @@ export default function ProductCard({ product }) {
 
         {/* Collection Badge */}
         {product.collection_name && (
-          <span className="absolute top-3 left-3 bg-charcoal/80 text-cream text-xs px-3 py-1 rounded-full font-medium">
+          <span className="absolute top-3 left-3 bg-charcoal/80 text-cream text-xs px-3 py-1 rounded-full font-medium flex items-center gap-1">
+            <svg width="10" height="10" viewBox="0 0 60 60" className="inline-block"><circle cx="30" cy="30" r="25" fill="#D4A574" opacity="0.6" /><path d="M15 30 Q30 20 45 30" fill="none" stroke="#D4A574" strokeWidth="2" opacity="0.8" /></svg>
             {product.collection_name}
           </span>
         )}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Globe, ExternalLink } from 'lucide-react'
 import EmailSignup from './EmailSignup'
+import YarnDivider from './YarnDivider'
 
 const shopLinks = [
   { to: '/shop', label: 'All Products' },
@@ -30,7 +31,8 @@ const popularSearchLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal text-cream">
+    <footer className="bg-charcoal text-cream knit-texture">
+      <YarnDivider color="#E8C9A0" className="opacity-30" />
       {/* Email Signup */}
       <div className="border-b border-charcoal-light/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

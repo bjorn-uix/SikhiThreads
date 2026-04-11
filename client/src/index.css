@@ -15,6 +15,11 @@
   --color-warm-white: #FFFDF9;
   --color-success: #5B8C5A;
   --color-error: #C45B4A;
+  --color-coral: #E07A5F;
+  --color-sage: #81B29A;
+  --color-dusty-rose: #D4A0A0;
+  --color-yarn-cream: #F5ECD7;
+  --color-yarn-amber: #C9956B;
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
 }
@@ -48,4 +53,82 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-slide-up {
   animation: slide-up 0.4s ease-out;
+}
+
+/* Crochet stitch border - looks like running stitches */
+.stitch-border {
+  border: 2px dashed var(--color-gold);
+  border-spacing: 4px;
+  border-radius: 12px;
+}
+
+/* Cross-stitch pattern border */
+.cross-stitch-border {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 8px, var(--color-gold-light) 8px, var(--color-gold-light) 9px),
+    repeating-linear-gradient(90deg, transparent, transparent 8px, var(--color-gold-light) 8px, var(--color-gold-light) 9px);
+  background-size: 10px 10px;
+  padding: 3px;
+  border-radius: 16px;
+}
+
+/* Yarn texture background */
+.yarn-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q15 25 30 30 Q45 35 60 30' fill='none' stroke='%23D4A574' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M0 45 Q15 40 30 45 Q45 50 60 45' fill='none' stroke='%23D4A574' stroke-width='0.5' opacity='0.1'/%3E%3Cpath d='M0 15 Q15 10 30 15 Q45 20 60 15' fill='none' stroke='%23D4A574' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+}
+
+/* Knit texture background - subtle crosshatch */
+.knit-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L10 0 M10 20 L20 10' fill='none' stroke='%238B6F47' stroke-width='0.3' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+/* Crochet card styling */
+.crochet-card {
+  background: var(--color-warm-white);
+  border: 2px dashed var(--color-gold-light);
+  border-radius: 16px;
+  position: relative;
+}
+.crochet-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed var(--color-gold-light);
+  border-radius: 13px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Yarn wobble animation */
+@keyframes yarn-wobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+.yarn-wobble:hover {
+  animation: yarn-wobble 0.5s ease-in-out;
+}
+
+/* Thread draw animation */
+@keyframes thread-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+.thread-draw {
+  stroke-dasharray: 1000;
+  animation: thread-draw 2s ease forwards;
+}
+
+/* Stitch appear animation */
+@keyframes stitch-appear {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.stitch-appear {
+  animation: stitch-appear 0.6s ease-out forwards;
+}
+
+/* Yarn ball spin */
+@keyframes yarn-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

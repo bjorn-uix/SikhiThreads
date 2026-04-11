@@ -18,6 +18,7 @@ import GlossaryPage from './pages/GlossaryPage'
 import LandingPage from './pages/LandingPage'
 import GiveawayPage from './pages/GiveawayPage'
 import VaisakhiGreetingPage from './pages/VaisakhiGreetingPage'
+import InstagramPage from './pages/InstagramPage'
 import NotFoundPage from './pages/NotFoundPage'
 import AdminLayout from './admin/AdminLayout'
 import EmailPopup from './components/EmailPopup'
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="/l/:slug" element={<LandingPage />} />
         <Route path="/giveaway" element={<GiveawayPage />} />
         <Route path="/vaisakhi" element={<VaisakhiGreetingPage />} />
+        <Route path="/instagram" element={<InstagramPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="/admin/*" element={<AdminLayout />} />

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Star } from 'lucide-react'
 import SEO from '../components/SEO'
+import YarnDivider, { YarnBall } from '../components/YarnDivider'
+import CrochetPattern from '../components/CrochetPattern'
 
 function InstagramIcon({ size = 24, className = '' }) {
   return (
@@ -98,21 +100,24 @@ export default function HomePage() {
         ]}
       />
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-charcoal via-brown-dark to-charcoal min-h-[80vh] flex items-center">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 25% 50%, rgba(212,165,116,0.3) 0%, transparent 50%), radial-gradient(circle at 75% 50%, rgba(139,111,71,0.2) 0%, transparent 50%)',
-          }} />
-        </div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-yarn-cream via-cream to-gold-light/20 min-h-[80vh] flex items-center yarn-texture">
+        <YarnBall size={120} className="absolute top-10 left-6 opacity-20 hidden md:block" />
+        <YarnBall size={80} className="absolute bottom-16 right-10 opacity-15 hidden md:block" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-          <p className="text-gold-light text-sm font-medium tracking-[0.2em] uppercase mb-6">
+          <p className="text-brown text-sm font-medium tracking-[0.2em] uppercase mb-6">
             Handcrafted with Love
           </p>
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-cream leading-tight mb-6">
+          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-charcoal leading-tight mb-4">
             Sikh Stories<br />
-            <span className="text-gold italic">Woven in Thread</span>
+            <span className="text-gold-dark italic">Woven in Thread</span>
           </h1>
-          <p className="text-cream/70 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-light">
+          {/* Decorative thread under headline */}
+          <div className="max-w-xs mx-auto mb-6">
+            <svg viewBox="0 0 200 12" fill="none" className="w-full">
+              <path d="M0 6 Q25 2 50 6 Q75 10 100 6 Q125 2 150 6 Q175 10 200 6" stroke="#D4A574" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+            </svg>
+          </div>
+          <p className="text-charcoal-light text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-light">
             Handcrafted crochet-aesthetic art that brings the beauty of Sikhi to life.
             Each piece tells a story of faith, courage, and love.
           </p>
@@ -126,7 +131,7 @@ export default function HomePage() {
             </Link>
             <Link
               to="/custom-orders"
-              className="inline-flex items-center gap-2 border-2 border-cream/30 hover:border-gold text-cream px-8 py-4 rounded-lg text-base font-semibold transition-all no-underline"
+              className="inline-flex items-center gap-2 border-2 border-charcoal/30 hover:border-gold text-charcoal px-8 py-4 rounded-lg text-base font-semibold transition-all no-underline"
             >
               Custom Orders
             </Link>
@@ -134,11 +139,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      <YarnDivider />
+
       {/* Featured Collection */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <p className="text-gold text-sm font-medium tracking-[0.15em] uppercase mb-2">Featured</p>
-          <h2 className="font-heading text-4xl font-bold text-charcoal mb-4">Vaisakhi Collection</h2>
+          <div className="flex items-center justify-center gap-3">
+            <YarnBall size={28} color="#D4A574" />
+            <h2 className="font-heading text-4xl font-bold text-charcoal mb-0">Vaisakhi Collection</h2>
+          </div>
           <p className="text-warm-gray max-w-xl mx-auto">
             Celebrating the harvest festival of new beginnings, rendered in our signature crochet-aesthetic style.
           </p>
@@ -170,8 +180,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      <YarnDivider />
+
       {/* Our Story Teaser */}
-      <section className="bg-cream-dark">
+      <section className="bg-cream-dark relative yarn-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -195,12 +207,15 @@ export default function HomePage() {
                 Read Our Story <ArrowRight size={16} />
               </Link>
             </div>
-            <div className="bg-gradient-to-br from-gold-light/30 to-gold/10 rounded-2xl aspect-square flex items-center justify-center">
-              <span className="font-heading text-6xl text-gold/40 italic">ST</span>
+            <div className="bg-gradient-to-br from-gold-light/30 to-gold/10 rounded-2xl aspect-square flex items-center justify-center relative overflow-hidden">
+              <CrochetPattern variant="stitch" opacity={0.08} />
+              <span className="font-heading text-6xl text-gold/40 italic relative z-10">ST</span>
             </div>
           </div>
         </div>
       </section>
+
+      <YarnDivider />
 
       {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -210,11 +225,14 @@ export default function HomePage() {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((t, i) => (
-            <div key={i} className="bg-warm-white rounded-xl p-8 shadow-sm border border-gold-light/20">
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} size={16} className="text-gold fill-gold" />
-                ))}
+            <div key={i} className="crochet-card p-8 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <YarnBall size={18} color="#D4A574" />
+                <div className="flex gap-1">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} size={16} className="text-gold fill-gold" />
+                  ))}
+                </div>
               </div>
               <p className="text-charcoal-light text-sm leading-relaxed mb-6 italic">
                 &ldquo;{t.text}&rdquo;
@@ -225,12 +243,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      <YarnDivider />
+
       {/* Email Signup */}
-      <section className="bg-charcoal">
+      <section className="bg-charcoal knit-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <EmailSignup />
         </div>
       </section>
+
+      <YarnDivider />
 
       {/* Instagram Teaser */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -252,7 +274,7 @@ export default function HomePage() {
           href="https://instagram.com/sikhithreads"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 mt-8 text-brown hover:text-brown-dark font-semibold no-underline transition-colors"
+          className="inline-flex items-center gap-2 mt-8 text-brown hover:text-brown-dark font-semibold no-underline transition-colors stitch-border px-6 py-3"
         >
           Follow Us on Instagram <ArrowRight size={16} />
         </a>
